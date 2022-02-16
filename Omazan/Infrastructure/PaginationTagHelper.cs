@@ -25,6 +25,10 @@ namespace Omazan.Models.Infrastructure
 
         public PageInfo PageModel { get; set; }
         public string PageAction { get; set; }
+        public bool PageClassesEnabled { get; set; }
+        public string PageClass { get; set; }
+        public string PageClassNormal { get; set; }
+        public string PageClassSelected { get; set; }
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
             IUrlHelper uh = uhf.GetUrlHelper(viewContext);
@@ -35,7 +39,12 @@ namespace Omazan.Models.Infrastructure
             {
                 TagBuilder tagBuilder = new TagBuilder("a");
                 tagBuilder.Attributes["href"] = uh.Action(PageAction, new { pagenum = i });
-                tagBuilder.InnerHtml.Append(i.ToString() + " ");
+                if (PageClassesEnabled)
+                {
+                    tagBuilder.AddCssClass(PageClass);
+                    tagBuilder.AddCssClass(i == PageModel.currPage ? PageClassSelected : PageClassNormal);
+                }
+                tagBuilder.InnerHtml.Append(i.ToString());
                 
             
                 
