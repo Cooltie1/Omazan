@@ -6,7 +6,24 @@
 
 @foreach (Books book in Model.books)
 {
-    <h3>@book.Title</h3>
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <h2 style="color:cornflowerblue">@book.Title</h2>
+                <h5>@book.Classification</h5>
+                <small>@book.Publisher (@book.PageCount pages)</small>
+                <br />
+                <small>@book.Isbn</small>
+            </div>
+            <div class="col-6 text-right d-flex flex-column justify-content-between">
+                <h4>@book.Author</h4>
+                <h4 class="font-weight-bold">$@book.Price</h4>
+            </div>
+        </div>
+        
+    </div>
+    <hr />
+    
 }
 
 <div page-model="@Model.pageInfo" page-action="Index" page-classes-enabled="true"
