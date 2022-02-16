@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Omazan.Models;
+using Omazan.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -23,9 +24,25 @@ namespace Omazan.Controllers
             _repository = tmp;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int pagenum = 1)
         {
-            return View();
+            int pageSize = 5;
+
+            var viewModel = new BooksViewModel
+            {
+                books = _repository.Books
+                .OrderBy(b => b.Title)
+                .Skip((pagenum - 1) * pageSize)
+                .Take(pageSize),
+                pageInfo = new PageInfo
+                {
+                    totalBooks = _repository.Books.Count(),
+                    booksPerPage = pageSize,
+                    currPage = pagenum
+                }
+            };
+
+            return View(viewModel);
         }
 
         public IActionResult Privacy()
