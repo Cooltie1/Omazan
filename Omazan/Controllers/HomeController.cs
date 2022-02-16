@@ -13,9 +13,14 @@ namespace Omazan.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private IOmazanRepository _repository;
+
+
+
+        public HomeController(ILogger<HomeController> logger, IOmazanRepository tmp)
         {
             _logger = logger;
+            _repository = tmp;
         }
 
         public IActionResult Index()
