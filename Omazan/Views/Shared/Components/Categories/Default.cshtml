@@ -3,13 +3,15 @@
 
 @model IEnumerable<String>
 
+
 <a asp-controller="Home" asp-action="Index" asp-route-category="" asp-route-pagenum="1"
-   class="@(ViewBag.Selected == null  || ViewBag.Selected == "" ? "btn-primary" : "btn-secondary")">Home</a>
-<a data-toggle="collapse" href="#categoryDropdown" role="button" aria-expanded="false" aria-controls="categoryDropDown">Shop by Category</a>
-<div class="collapse" id="categoryDropdown">
+    class="h2 nav-link @(ViewBag.Selected == null  || ViewBag.Selected == "" ? "font-weight-bold" : "font-weight-normal")">Home</a>
+<a class= "nav-link bg-light"data-toggle="collapse" href="#categoryDropdown" role="button" aria-expanded="false" aria-controls="categoryDropDown">Shop by Category</a>
+<div class="collapse @(ViewBag.Selected == null  || ViewBag.Selected == "" ? "" : "show") " id="categoryDropdown">
     @foreach (string category in Model)
     {
         <a asp-controller="Home" asp-action="Index" asp-route-category="@category" asp-route-pagenum="1"
-           class="@(ViewBag.Selected == category ? "btn-primary" : "btn-secondary")">@category</a>
+            class="nav-link bg-light @(ViewBag.Selected == category ? "font-weight-bold" : "")">@category</a>
     }
 </div>
+   
