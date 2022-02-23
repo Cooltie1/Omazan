@@ -1,0 +1,24 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@model Books
+ 
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <h2 style="color:cornflowerblue">@Model.Title</h2>
+            <h5>@Model.Classification</h5>
+            <small>@Model.Publisher (@Model.PageCount pages)</small>
+            <br />
+            <small>@Model.Isbn</small>
+        </div>
+        <div class="col-6 text-right d-flex flex-column justify-content-between">
+            <h4>@Model.Author</h4>
+            <h4 class="font-weight-bold">$@Model.Price</h4>
+        </div>
+    </div>
+
+</div>
+<hr />
+
