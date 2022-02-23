@@ -18,6 +18,8 @@ namespace Omazan.Components
 
         public IViewComponentResult Invoke()
         {
+
+            ViewBag.Selected = RouteData?.Values["category"];
             var categories = _repo.Books
                 .Select(x => x.Category)
                 .Distinct()

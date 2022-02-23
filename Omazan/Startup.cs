@@ -58,8 +58,24 @@ namespace Omazan
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    name: "categorypage",
+                    pattern: "{category}/{pagenum}",
+                    defaults: new { Controller = "Home", action = "Index" }
+                );
+
+                endpoints.MapControllerRoute(
+                    name: "Paging",
+                    pattern: "{pagenum}",
+                    defaults: new { Controller = "Home", action = "Index", category = "" }
+                );
+
+                endpoints.MapControllerRoute(
+                    name: "category",
+                    pattern: "{category}",
+                    defaults: new { Controller = "Home", action = "Index", pagenum = 1 }
+                );
+
+                endpoints.MapDefaultControllerRoute();
             });
         }
     }

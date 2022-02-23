@@ -1,0 +1,14 @@
+﻿@{
+}
+
+@model IEnumerable<String>
+
+<a asp-controller="Home" asp-action="Index" asp-route-category="" asp-route-pagenum="1"
+   class="@(ViewBag.Selected == null  || ViewBag.Selected == "" ? "btn-primary" : "btn-secondary")">Home</a>
+
+@foreach (string category in Model)
+{
+    <a asp-controller="Home" asp-action="Index" asp-route-category="@category" asp-route-pagenum="1"
+       class="@(ViewBag.Selected == category ? "btn-primary" : "btn-secondary")">@category</a>
+}
+

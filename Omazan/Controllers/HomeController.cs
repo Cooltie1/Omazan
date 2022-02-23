@@ -24,7 +24,7 @@ namespace Omazan.Controllers
             _repository = tmp;
         }
 
-        public IActionResult Index(int pagenum = 1)
+        public IActionResult Index(string category, int pagenum = 1)
         {
             int pageSize = 5;
 
@@ -32,11 +32,12 @@ namespace Omazan.Controllers
             {
                 books = _repository.Books
                 .OrderBy(b => b.Title)
+                .Where(b => b.Category == category || category == null)
                 .Skip((pagenum - 1) * pageSize)
                 .Take(pageSize),
                 pageInfo = new PageInfo
                 {
-                    totalBooks = _repository.Books.Count(),
+                    totalBooks = (category == null ? _repository.Books.Count() : _repository.Books.Where(x => x.Category == category).Count()),
                     booksPerPage = pageSize,
                     currPage = pagenum
                 }
