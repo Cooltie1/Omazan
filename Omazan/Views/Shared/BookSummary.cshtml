@@ -15,7 +15,13 @@
         </div>
         <div class="col-6 text-right d-flex flex-column justify-content-between">
             <h4>@Model.Author</h4>
+            
             <h4 class="font-weight-bold">$@Model.Price</h4>
+            <form method="post" asp-page="/Cart">
+                <input type="hidden" asp-for="@Model.BookId" />
+                <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+                <button type="submit" class="btn btn-success btn-sm float-end">Add to Cart</button>
+            </form>
         </div>
     </div>
 

@@ -1,0 +1,40 @@
+﻿@page
+@model Omazan.Pages.CartModel
+@{
+}
+
+
+<h2>My Cart</h2>
+
+<table class="table table-bordered table-striped">
+
+    <thead>
+        <tr>
+            <th>Item</th>
+            <th>Quantity</th>
+            <th>Cost</th>
+            <th>Subtotal</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model.basket.items)
+        {
+            <tr>
+                <td>@item.book.Title</td>
+                <td>@item.quantity</td>
+                <td>@item.book.Price.ToString("c")</td>
+                <td>@((item.book.Price * item.quantity).ToString("c"))</td>
+            </tr>
+        }
+    </tbody>
+
+    <tfoot>
+        <tr>
+            <td colspan="3">Total: </td>
+            <td>@Model.basket.CalcTotal().ToString("c")</td>
+        </tr>
+    </tfoot>
+
+</table>
+<a class="btn btn-primary" href="@Model.ReturnUrl">&larr; Back</a>

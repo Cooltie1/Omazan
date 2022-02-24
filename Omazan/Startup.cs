@@ -32,6 +32,12 @@ namespace Omazan
             });
 
             services.AddScoped<IOmazanRepository, EFOmazanRepository>();
+
+            services.AddRazorPages();
+
+            // Add sessions
+            services.AddDistributedMemoryCache();
+            services.AddSession();
         }
 
 
@@ -50,7 +56,7 @@ namespace Omazan
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthorization();
@@ -76,6 +82,8 @@ namespace Omazan
                 );
 
                 endpoints.MapDefaultControllerRoute();
+
+                endpoints.MapRazorPages();
             });
         }
     }

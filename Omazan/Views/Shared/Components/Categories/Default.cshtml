@@ -6,7 +6,8 @@
 
 <a asp-controller="Home" asp-action="Index" asp-route-category="" asp-route-pagenum="1"
     class="h2 nav-link @(ViewBag.Selected == null  || ViewBag.Selected == "" ? "font-weight-bold" : "font-weight-normal")">Home</a>
-<a class= "nav-link bg-light"data-toggle="collapse" href="#categoryDropdown" role="button" aria-expanded="false" aria-controls="categoryDropDown">Shop by Category</a>
+<a href="/Cart" class="h4 nav-link font-weight-normal">My Cart</a>
+<a class="nav-link bg-light" data-toggle="collapse" href="#categoryDropdown" role="button" aria-expanded="false" aria-controls="categoryDropDown">Shop by Category</a>
 <div class="collapse @(ViewBag.Selected == null  || ViewBag.Selected == "" ? "" : "show") " id="categoryDropdown">
     @foreach (string category in Model)
     {
