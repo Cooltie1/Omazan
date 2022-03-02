@@ -20,7 +20,7 @@ namespace Omazan.Models
         }
 
         public virtual DbSet<Books> Books { get; set; }
-
+        public virtual DbSet<Purchase> Purchases { get; set; }
  
     }
 }
