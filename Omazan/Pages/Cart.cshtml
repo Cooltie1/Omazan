@@ -25,7 +25,15 @@
                 <td>@item.quantity</td>
                 <td>@item.book.Price.ToString("c")</td>
                 <td>@((item.book.Price * item.quantity).ToString("c"))</td>
+                <td class="text-center" style="width: 40px">
+                    <form method="post" asp-page-handler="Remove">
+                        <input type="hidden" name="bookId" value="@item.book.BookId" />
+                        <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
+                        <button type="submit" class="btn btn-sm btn-outline-danger">Remove</button>
+                    </form>
+                </td>
             </tr>
+
         }
     </tbody>
 
@@ -39,5 +47,5 @@
 </table>
 <div class="d-flex justify-content-between m-auto w-100">
     <a class="btn btn-outline-primary" href="@Model.ReturnUrl">&larr; Back</a>
-    <a class="btn btn-primary" href="">Checkout</a>
+    <a class="btn btn-primary" asp-action="Checkout" asp-controller="Purchase">Checkout</a>
 </div>
