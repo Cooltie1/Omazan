@@ -42,6 +42,8 @@ namespace Omazan
 
             services.AddScoped(x => SessionBasket.GetBasket(x));
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            services.AddServerSideBlazor();
         }
 
 
@@ -88,6 +90,9 @@ namespace Omazan
                 endpoints.MapDefaultControllerRoute();
 
                 endpoints.MapRazorPages();
+
+                endpoints.MapBlazorHub();
+                endpoints.MapFallbackToPage("/admin/{*catchall}", "/Admin/Index");
             });
         }
     }

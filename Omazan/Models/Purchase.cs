@@ -35,5 +35,8 @@ namespace Omazan.Models
         public string Phone { get; set; }
         [Required(ErrorMessage = "Please enter a valid email address")]
         public string email { get; set; }
+
+        [BindNever]
+        public bool shipped { get; set; }
     }
 }
