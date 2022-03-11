@@ -1,0 +1,68 @@
+﻿<table class="table table-sm table-striped table-bordered">
+    <thead>
+        <tr>
+            <th colspan="5" class="text-center">@TableTitle</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Orders?.Count() > 0)
+            {
+                @foreach (Purchase order in Orders)
+                {
+                    <tr>
+                        <td>@order.Name</td>
+                        <td>@order.PurchaseId</td>
+                        <th>Book</th>
+                        <th>Quantity</th>
+                        <td>
+                            @if (order.shipped)
+                            {
+                                <button class="btn btn-sm btn-danger" @onclick="@(x => OrderSelected.InvokeAsync(order.PurchaseId))">
+                                    @ButtonLabel
+                                </button>
+                            }
+                            else
+                            {
+                                <button class="btn btn-sm btn-success" @onclick="@(x => OrderSelected.InvokeAsync(order.PurchaseId))">
+                                    @ButtonLabel
+                                </button>
+                            }
+
+                        </td>
+                    </tr>
+                    @foreach (BasketLineItem line in order.Lines)
+                    {
+                        <tr>
+                            <td colspan="2"></td>
+                            <td>@line.book.Title</td>
+                            <td>@line.quantity</td>
+                        </tr>
+                    }
+                }
+            }
+        else
+            {
+                <tr>
+                    <td colspan="5" class="text-center">No Orders</td>
+                </tr>
+            }
+    </tbody>
+</table>
+
+
+
+
+@code {
+
+    [Parameter]
+    public string TableTitle { get; set; } = "Orders";
+
+    [Parameter]
+    public IEnumerable<Purchase> Orders { get; set; }
+
+    [Parameter]
+    public string ButtonLabel { get; set; } = "Shippped";
+
+    [Parameter]
+    public EventCallback<int> OrderSelected { get; set; }
+}
