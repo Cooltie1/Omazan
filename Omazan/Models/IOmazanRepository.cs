@@ -8,5 +8,8 @@ namespace Omazan.Models
     public interface IOmazanRepository
     {
         IQueryable<Books> Books { get; }
+        public void SaveBook(Books book);
+        public void CreateBook(Books book);
+        public void DeleteBook(Books book);
     }
 }

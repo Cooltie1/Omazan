@@ -15,5 +15,23 @@ namespace Omazan.Models
         }
 
         public IQueryable<Books> Books => _context.Books;
+
+        public void SaveBook(Books book)
+        {
+            
+            _context.SaveChanges();
+        }
+
+        public void CreateBook(Books book)
+        {
+            _context.Add(book);
+            _context.SaveChanges();
+        }
+
+        public void DeleteBook(Books book)
+        {
+            _context.Remove(book);
+            _context.SaveChanges();
+        }
     }
 }

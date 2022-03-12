@@ -69,6 +69,9 @@ namespace Omazan
 
             app.UseEndpoints(endpoints =>
             {
+
+                
+
                 endpoints.MapControllerRoute(
                     name: "categorypage",
                     pattern: "{category}/{pagenum}",
@@ -87,12 +90,18 @@ namespace Omazan
                     defaults: new { Controller = "Home", action = "Index", pagenum = 1 }
                 );
 
+                endpoints.MapControllerRoute(
+                    name: "defalut",
+                    pattern: "{controller=Home}/{action=Index}/{id?}"
+                );
+
                 endpoints.MapDefaultControllerRoute();
 
                 endpoints.MapRazorPages();
 
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/admin/{*catchall}", "/Admin/Index");
+
             });
         }
     }

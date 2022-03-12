@@ -1,9 +1,65 @@
 ﻿@page "/admin/books"
 @page "/admin"
+@inherits OwningComponentBase<IOmazanRepository>
 
-<h3>Books</h3>
+<table class="table table-sm table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Book ID</th>
+            <th>Title</th>
+            <th>Category</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (BookData?.Count() > 0)
+            {
+                @foreach (Omazan.Models.Books book in BookData)
+                {
+        <tr>
+            <td>@book.BookId</td>
+            <td>@book.Title</td>
+            <td>@book.Category</td>
+            <td>
+                <NavLink class="btn btn-outline-info btn-sm" href="@GetDetailsUrl(book.BookId)">Details</NavLink>
+            </td>
+            <td>
+                <NavLink class="btn btn-outline-secondary btn-sm" href="@GetEditUrl(book.BookId)">Edit</NavLink>
+            </td>
+            <td>
+                <NavLink class="btn btn-sm btn-outline-warning" @onclick="@(x => RemoveBook(book))">Remove</NavLink>
+            </td>
+        </tr>
+                }
+            }
+         else
+            {
+                <tr>
+                    <td colspan="5" class="text-center">No Books</td>
+                </tr>
+            }
+    </tbody>
+</table>
+
+<NavLink class="btn btn-primary" href="/admin/books/create">Create</NavLink>
 
 
 @code {
+    public IOmazanRepository repo => Service;
+    public IEnumerable<Omazan.Models.Books> BookData { get; set; }
+    protected async override Task OnInitializedAsync()
+    {
+        await UpdateData();
+    }
+    public async Task UpdateData()
+    {
+        BookData = await repo.Books.ToListAsync();
+    }
 
+    public string GetDetailsUrl(long id) => $"/admin/books/details/{id}";
+    public string GetEditUrl(long id) => $"/admin/books/edit/{id}";
+    public async Task RemoveBook(Omazan.Models.Books book)
+    {
+        repo.DeleteBook(book);
+        await UpdateData();
+    }
 }
