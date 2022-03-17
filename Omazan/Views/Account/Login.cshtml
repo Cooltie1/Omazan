@@ -1,0 +1,53 @@
+﻿@{
+    Layout = null;
+}
+
+@model LoginModel
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Omazan</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link href="~/lib/font-awesome/css/all.css" rel="stylesheet" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Bezos Books</a>
+                <div class="col-6 text-right">
+                    <vc:cart-summary></vc:cart-summary>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="m-auto ">
+        <div class="text-danger " asp-validation-summary="All"></div>
+        <form method="post" asp-controller="Account" asp-action="Login">
+            <div class="form-group col-md-4 m-auto text-center pb-2">
+                <label asp-for="Username">Username</label>
+                <input asp-for="Username" class="form-control" />
+            </div>
+            <div class="form-group col-md-4 m-auto text-center pb-2">
+                <label asp-for="Password">Password</label>
+                <input asp-for="Password" class="form-control" type="password" />
+            </div>
+            <div class="container mt-2">
+                <div class="row">
+                    <div class="col text-center">
+                        <button class="btn btn-primary" type="submit">Log In</button>
+                    </div>
+                </div>
+            </div>
+            
+            <input type="hidden" asp-for="ReturnUrl" />
+        </form>
+    </div>
+</body>
+</html>
