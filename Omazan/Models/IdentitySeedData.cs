@@ -12,7 +12,7 @@ namespace Omazan.Models
     public static class IdentitySeedData
     {
         private const string adminUser = "Admin";
-        private const string AdminPassword = "Password123!";
+        private const string AdminPassword = "413ExtraYeetPeriod(t)!";
 
         
         public static async void EnsurePopulated(IApplicationBuilder app)
